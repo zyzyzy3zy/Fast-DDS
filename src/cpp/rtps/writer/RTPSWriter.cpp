@@ -18,9 +18,11 @@
  */
 
 #include <fastrtps/rtps/writer/RTPSWriter.h>
+#include <fastrtps/rtps/reader/RTPSReader.h>
 #include <fastrtps/rtps/history/WriterHistory.h>
 #include <fastrtps/rtps/messages/RTPSMessageCreator.h>
 #include <fastrtps/log/Log.h>
+#include <fastrtps/rtps/RTPSDomain.h>
 #include "../participant/RTPSParticipantImpl.h"
 #include "../flowcontrol/FlowController.h"
 
@@ -167,6 +169,58 @@ void RTPSWriter::update_cached_info_nts(std::vector<GUID_t>&& allRemoteReaders,
     mAllRemoteReaders = std::move(allRemoteReaders);
     mAllShrinkedLocatorList.clear();
     mAllShrinkedLocatorList.push_back(mp_RTPSParticipant->network_factory().ShrinkLocatorLists(allLocatorLists));
+}
+
+bool RTPSWriter::add_local_reader_nts(const GUID_t& guid)
+{
+    // Ask domain to find reader
+    auto reader = RTPSDomain::findRTPSReader(guid);
+    if (reader != nullptr)
+    {
+        // Reader found. Add to local readers
+        mAllLocalReaders.emplace_back(reader);
+        return true;
+    }
+
+    // Reader is not local
+    return false;
+}
+
+bool RTPSWriter::remove_local_reader_nts(const GUID_t& guid)
+{
+    auto it = mAllLocalReaders.begin();
+    while (it != mAllLocalReaders.end())
+    {
+        if ((*it)->getGuid() == guid)
+        {
+            mAllLocalReaders.erase(it);
+            return true;
+        }
+        ++it;
+    }
+
+    return false;
+}
+
+RTPSReader* RTPSWriter::find_local_reader_nts(const GUID_t& guid)
+{
+    for (auto it : mAllLocalReaders)
+    {
+        if (it->getGuid() == guid)
+        {
+            return it;
+        }
+    }
+
+    return nullptr;
+}
+
+void RTPSWriter::send_to_local_readers_nts(CacheChange_t* change)
+{
+    for (auto it : mAllLocalReaders)
+    {
+        it->processDataMsg(change);
+    }
 }
 
 #if HAVE_SECURITY

@@ -31,6 +31,7 @@ namespace eprosima {
 namespace fastrtps{
 namespace rtps {
 
+class RTPSReader;
 class WriterListener;
 class WriterHistory;
 class FlowController;
@@ -190,6 +191,8 @@ class RTPSWriter : public Endpoint
 
     std::vector<GUID_t> mAllRemoteReaders;
 
+    std::vector<RTPSReader*> mAllLocalReaders;
+
     void update_cached_info_nts(std::vector<GUID_t>&& allRemoteReaders,
             std::vector<LocatorList_t>& allLocatorLists);
 
@@ -216,6 +219,11 @@ class RTPSWriter : public Endpoint
 
     bool encrypt_cachechange(CacheChange_t* change);
 #endif
+
+    bool add_local_reader_nts(const GUID_t& guid);
+    bool remove_local_reader_nts(const GUID_t& guid);
+    RTPSReader* find_local_reader_nts(const GUID_t& guid);
+    void send_to_local_readers_nts(CacheChange_t* change);
 
     private:
 
