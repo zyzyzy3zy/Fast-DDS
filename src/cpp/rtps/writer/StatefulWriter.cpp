@@ -94,6 +94,8 @@ void StatefulWriter::unsent_change_added_to_history(CacheChange_t* change)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
+    send_to_local_readers_nts(change);
+
 #if HAVE_SECURITY
     encrypt_cachechange(change);
 #endif
@@ -412,6 +414,22 @@ bool StatefulWriter::matched_reader_add(const RemoteReaderAttributes& rdata)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
+    // Check for existing intra process reader
+    auto localReader = find_local_reader_nts(rdata.guid);
+    if (localReader != nullptr)
+    {
+        logInfo(RTPS_WRITER, "Attempting to add existing reader" << endl);
+        return false;
+    }
+
+    // Try adding intra-process reader
+    if (add_local_reader_nts(rdata.guid))
+    {
+        // TODO: Send history to reader when not volatile
+        logInfo(RTPS_READER, "Local reader " << rdata.guid << " added to " << m_guid.entityId);
+        return true;
+    }
+
     if(rdata.guid == c_Guid_Unknown)
     {
         logError(RTPS_WRITER,"Reliable Writer need GUID_t of matched readers");
@@ -532,6 +550,11 @@ bool StatefulWriter::matched_reader_remove(const RemoteReaderAttributes& rdata)
     ReaderProxy *rproxy = nullptr;
     std::unique_lock<std::recursive_mutex> lock(*mp_mutex);
 
+    if (remove_local_reader_nts(rdata.guid))
+    {
+        return true;
+    }
+
     std::vector<GUID_t> allRemoteReaders;
     std::vector<LocatorList_t> allLocatorLists;
 
@@ -579,6 +602,11 @@ bool StatefulWriter::matched_reader_remove(const RemoteReaderAttributes& rdata)
 bool StatefulWriter::matched_reader_is_matched(const RemoteReaderAttributes& rdata)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
+    if (find_local_reader_nts(rdata.guid) != nullptr)
+    {
+        return true;
+    }
+
     for(std::vector<ReaderProxy*>::iterator it=matched_readers.begin();it!=matched_readers.end();++it)
     {
         std::lock_guard<std::recursive_mutex> rguard(*(*it)->mp_mutex);

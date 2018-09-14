@@ -71,6 +71,8 @@ void StatelessWriter::unsent_change_added_to_history(CacheChange_t* cptr)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
+    send_to_local_readers_nts(cptr);
+
     if (!reader_locators.empty())
     {
 #if HAVE_SECURITY
@@ -258,6 +260,21 @@ bool StatelessWriter::matched_reader_add(const RemoteReaderAttributes& rdata)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
+    // Check for existing intra process reader
+    auto localReader = find_local_reader_nts(rdata.guid);
+    if (localReader != nullptr)
+    {
+        logInfo(RTPS_WRITER, "Attempting to add existing reader" << endl);
+        return false;
+    }
+
+    // Try adding intra-process reader
+    if(add_local_reader_nts(rdata.guid))
+    { 
+        logInfo(RTPS_READER, "Local reader " << rdata.guid << " added to " << m_guid.entityId);
+        return true;
+    }
+
     std::vector<GUID_t> allRemoteReaders = get_builtin_guid();
     std::vector<LocatorList_t> allLocatorLists;
     bool addGuid = allRemoteReaders.empty();
@@ -290,7 +307,7 @@ bool StatelessWriter::matched_reader_add(const RemoteReaderAttributes& rdata)
 
     update_locators_nts_(rdata.endpoint.durabilityKind >= TRANSIENT_LOCAL ? rdata.guid : c_Guid_Unknown);
 
-    logInfo(RTPS_READER,"Reader " << rdata.guid << " added to "<<m_guid.entityId);
+    logInfo(RTPS_READER,"Remote reader " << rdata.guid << " added to "<<m_guid.entityId);
     return true;
 }
 
@@ -408,6 +425,11 @@ bool StatelessWriter::matched_reader_remove(const RemoteReaderAttributes& rdata)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
+    if (remove_local_reader_nts(rdata.guid))
+    {
+        return true;
+    }
+
     std::vector<GUID_t> allRemoteReaders = get_builtin_guid();
     std::vector<LocatorList_t> allLocatorLists;
     bool found = false, addGuid = allRemoteReaders.empty();
@@ -440,6 +462,12 @@ bool StatelessWriter::matched_reader_remove(const RemoteReaderAttributes& rdata)
 bool StatelessWriter::matched_reader_is_matched(const RemoteReaderAttributes& rdata)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
+
+    if (find_local_reader_nts(rdata.guid) != nullptr)
+    {
+        return true;
+    }
+
     for(auto rit = m_matched_readers.begin();
             rit!=m_matched_readers.end();++rit)
     {
