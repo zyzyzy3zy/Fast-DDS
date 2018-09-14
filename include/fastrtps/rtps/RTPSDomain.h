@@ -24,6 +24,7 @@
 #include "common/Types.h"
 
 #include "attributes/RTPSParticipantAttributes.h"
+#include "common/Guid.h"
 
 #include <atomic>
 #include <mutex>
@@ -112,6 +113,13 @@ class RTPSDomain
      * @return  True if correctly removed.
      */
     RTPS_DllAPI static bool removeRTPSReader(RTPSReader* reader);
+
+    /**
+     * Find a reader on this RTPSDomain.
+     * @param guid GUID of the reader to search.
+     * @return Pointer to the corresponding RTPS reader or nullptr if reader is not found.
+     */
+    static RTPSReader* findRTPSReader(const GUID_t& guid);
 
     /**
      * Remove a RTPSParticipant and delete all its associated Writers, Readers, resources, etc.

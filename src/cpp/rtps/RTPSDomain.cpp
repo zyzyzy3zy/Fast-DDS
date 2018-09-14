@@ -254,6 +254,20 @@ bool RTPSDomain::removeRTPSReader(RTPSReader* reader)
     return false;
 }
 
+RTPSReader* RTPSDomain::findRTPSReader(const GUID_t& guid)
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    for (auto it = m_RTPSParticipants.begin(); it != m_RTPSParticipants.end(); ++it)
+    {
+        if (it->first->getGuid().guidPrefix == guid.guidPrefix)
+        {
+            return it->second->findReader(guid);
+        }
+    }
+
+    return nullptr;
+}
+
 } /* namespace  rtps */
 } /* namespace  fastrtps */
 } /* namespace eprosima */

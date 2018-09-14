@@ -378,6 +378,8 @@ class RTPSParticipantImpl
         bool createReader(RTPSReader** Reader, ReaderAttributes& param,ReaderHistory* hist,ReaderListener* listen,
                 const EntityId_t& entityId = c_EntityId_Unknown,bool isBuiltin = false, bool enable = true);
 
+        RTPSReader* findReader(const GUID_t& guid);
+
         bool enableReader(RTPSReader *reader);
 
         void disableReader(RTPSReader *reader);

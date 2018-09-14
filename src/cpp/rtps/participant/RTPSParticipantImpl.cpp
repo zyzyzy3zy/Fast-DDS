@@ -700,6 +700,20 @@ bool RTPSParticipantImpl::createReader(RTPSReader** ReaderOut,
     return true;
 }
 
+RTPSReader* RTPSParticipantImpl::findReader(const GUID_t& guid)
+{
+    for (std::vector<RTPSReader*>::const_iterator it = m_userReaderList.begin();
+        it != m_userReaderList.end(); ++it)
+    {
+        if (guid == (*it)->getGuid())
+        {
+            return *it;
+        }
+    }
+
+    return nullptr;
+}
+
 bool RTPSParticipantImpl::enableReader(RTPSReader *reader)
 {
     if(!assignEndpointListenResources((Endpoint*)reader))
