@@ -186,6 +186,8 @@ class RTPSWriter : public Endpoint
     WriterListener* mp_listener;
     //Asynchronout publication activated
     bool is_async_;
+    
+    bool m_intraprocess_enabled;
 
     LocatorList_t mAllShrinkedLocatorList;
 

@@ -44,7 +44,9 @@ RTPSWriter::RTPSWriter(RTPSParticipantImpl* impl, GUID_t& guid, WriterAttributes
     m_livelinessAsserted(false),
     mp_history(hist),
     mp_listener(listen),
-    is_async_(att.mode == SYNCHRONOUS_WRITER ? false : true)
+    is_async_(att.mode == SYNCHRONOUS_WRITER ? false : true),
+    m_intraprocess_enabled(impl->getRTPSParticipantAttributes().useIntraProcess)
+
 #if HAVE_SECURITY
     , encrypt_payload_(mp_history->getTypeMaxSerialized())
 #endif
@@ -173,13 +175,16 @@ void RTPSWriter::update_cached_info_nts(std::vector<GUID_t>&& allRemoteReaders,
 
 bool RTPSWriter::add_local_reader_nts(const GUID_t& guid)
 {
-    // Ask domain to find reader
-    auto reader = RTPSDomain::findRTPSReader(guid);
-    if (reader != nullptr)
+    if (m_intraprocess_enabled)
     {
-        // Reader found. Add to local readers
-        mAllLocalReaders.emplace_back(reader);
-        return true;
+        // Ask domain to find reader
+        auto reader = RTPSDomain::findRTPSReader(guid);
+        if (reader != nullptr)
+        {
+            // Reader found. Add to local readers
+            mAllLocalReaders.emplace_back(reader);
+            return true;
+        }
     }
 
     // Reader is not local
@@ -188,15 +193,18 @@ bool RTPSWriter::add_local_reader_nts(const GUID_t& guid)
 
 bool RTPSWriter::remove_local_reader_nts(const GUID_t& guid)
 {
-    auto it = mAllLocalReaders.begin();
-    while (it != mAllLocalReaders.end())
+    if (m_intraprocess_enabled)
     {
-        if ((*it)->getGuid() == guid)
+        auto it = mAllLocalReaders.begin();
+        while (it != mAllLocalReaders.end())
         {
-            mAllLocalReaders.erase(it);
-            return true;
+            if ((*it)->getGuid() == guid)
+            {
+                mAllLocalReaders.erase(it);
+                return true;
+            }
+            ++it;
         }
-        ++it;
     }
 
     return false;
@@ -204,11 +212,14 @@ bool RTPSWriter::remove_local_reader_nts(const GUID_t& guid)
 
 RTPSReader* RTPSWriter::find_local_reader_nts(const GUID_t& guid)
 {
-    for (auto it : mAllLocalReaders)
+    if (m_intraprocess_enabled)
     {
-        if (it->getGuid() == guid)
+        for (auto it : mAllLocalReaders)
         {
-            return it;
+            if (it->getGuid() == guid)
+            {
+                return it;
+            }
         }
     }
 
@@ -217,9 +228,12 @@ RTPSReader* RTPSWriter::find_local_reader_nts(const GUID_t& guid)
 
 void RTPSWriter::send_to_local_readers_nts(CacheChange_t* change)
 {
-    for (auto it : mAllLocalReaders)
+    if (m_intraprocess_enabled)
     {
-        it->processDataMsg(change);
+        for (auto it : mAllLocalReaders)
+        {
+            it->processDataMsg(change);
+        }
     }
 }
 

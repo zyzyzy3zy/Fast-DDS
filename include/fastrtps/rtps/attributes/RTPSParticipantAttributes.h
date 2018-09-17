@@ -280,6 +280,8 @@ class RTPSParticipantAttributes
         std::vector<std::shared_ptr<TransportDescriptorInterface> > userTransports;
         //!Set as false to disable the default UDPv4 implementation.
         bool useBuiltinTransports;
+        //!Set as true to enable direct copy for intra-process endpoints
+        bool useIntraProcess;
 
         //! Property policies
         PropertyPolicy properties;
