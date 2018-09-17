@@ -71,14 +71,17 @@ void StatelessWriter::unsent_change_added_to_history(CacheChange_t* cptr)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
-    send_to_local_readers_nts(cptr);
-
-    if (!reader_locators.empty())
+    if (!reader_locators.empty() || !mAllLocalReaders.empty())
     {
 #if HAVE_SECURITY
         encrypt_cachechange(cptr);
 #endif
+    }
 
+    send_to_local_readers_nts(cptr);
+
+    if (!reader_locators.empty())
+    {
         if (!isAsync())
         {
             this->setLivelinessAsserted(true);

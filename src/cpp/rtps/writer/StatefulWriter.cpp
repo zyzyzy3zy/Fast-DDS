@@ -94,11 +94,11 @@ void StatefulWriter::unsent_change_added_to_history(CacheChange_t* change)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
 
-    send_to_local_readers_nts(change);
-
 #if HAVE_SECURITY
     encrypt_cachechange(change);
 #endif
+
+    send_to_local_readers_nts(change);
 
     //TODO Think about when set liveliness assertion when writer is asynchronous.
     this->setLivelinessAsserted(true);
