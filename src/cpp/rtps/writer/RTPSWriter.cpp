@@ -201,6 +201,10 @@ bool RTPSWriter::remove_local_reader_nts(const GUID_t& guid)
             if ((*it)->getGuid() == guid)
             {
                 mAllLocalReaders.erase(it);
+                if (mAllLocalReaders.empty())
+                {
+                    mLocalReadersLowMark = c_SequenceNumber_Unknown;
+                }
                 return true;
             }
             ++it;
@@ -230,6 +234,11 @@ void RTPSWriter::send_to_local_readers_nts(CacheChange_t* change)
 {
     if (m_intraprocess_enabled)
     {
+        if (mLocalReadersLowMark < change->sequenceNumber)
+        {
+            mLocalReadersLowMark = change->sequenceNumber;
+        }
+
         for (auto it : mAllLocalReaders)
         {
             it->processDataMsg(change);

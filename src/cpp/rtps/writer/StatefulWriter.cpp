@@ -699,7 +699,7 @@ void StatefulWriter::check_acked_status()
     std::unique_lock<std::recursive_mutex> lock(*mp_mutex);
 
     bool all_acked = true;
-    SequenceNumber_t min_low_mark;
+    SequenceNumber_t min_low_mark = mLocalReadersLowMark;
 
 
     for(auto it = matched_readers.begin(); it != matched_readers.end(); ++it)
@@ -763,7 +763,7 @@ bool StatefulWriter::try_remove_change(std::chrono::microseconds& microseconds,
 {
     logInfo(RTPS_WRITER, "Starting process try remove change for writer " << getGuid());
 
-    SequenceNumber_t min_low_mark;
+    SequenceNumber_t min_low_mark = mLocalReadersLowMark;
 
     for(auto it = matched_readers.begin(); it != matched_readers.end(); ++it)
     {

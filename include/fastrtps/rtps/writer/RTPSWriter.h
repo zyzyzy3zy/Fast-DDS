@@ -195,6 +195,8 @@ class RTPSWriter : public Endpoint
 
     std::vector<RTPSReader*> mAllLocalReaders;
 
+    SequenceNumber_t mLocalReadersLowMark;
+
     void update_cached_info_nts(std::vector<GUID_t>&& allRemoteReaders,
             std::vector<LocatorList_t>& allLocatorLists);
 
