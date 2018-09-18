@@ -21,6 +21,7 @@
 #include <fastrtps/rtps/writer/WriterListener.h>
 #include <fastrtps/rtps/writer/ReaderProxy.h>
 #include <fastrtps/rtps/resources/AsyncWriterThread.h>
+#include <fastrtps/rtps/reader/RTPSReader.h>
 
 #include "../participant/RTPSParticipantImpl.h"
 #include "../flowcontrol/FlowController.h"
@@ -425,7 +426,18 @@ bool StatefulWriter::matched_reader_add(const RemoteReaderAttributes& rdata)
     // Try adding intra-process reader
     if (add_local_reader_nts(rdata.guid))
     {
-        // TODO: Send history to reader when not volatile
+        // Send history to reader when not volatile
+        if (rdata.endpoint.durabilityKind >= TRANSIENT_LOCAL && this->getAttributes()->durabilityKind >= TRANSIENT_LOCAL)
+        {
+            localReader = find_local_reader_nts(rdata.guid);
+
+            for (std::vector<CacheChange_t*>::iterator cit = mp_history->changesBegin();
+                cit != mp_history->changesEnd(); ++cit)
+            {
+                localReader->processDataMsg(*cit);
+            }
+        }
+
         logInfo(RTPS_READER, "Local reader " << rdata.guid << " added to " << m_guid.entityId);
         return true;
     }
