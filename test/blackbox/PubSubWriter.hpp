@@ -454,6 +454,12 @@ class PubSubWriter
         return *this;
     }
 
+    PubSubWriter& intraProcessEnabled(bool enable)
+    {
+        participant_attr_.rtps.useIntraProcess = enable;
+        return *this;
+    }
+
     PubSubWriter& asynchronously(const eprosima::fastrtps::PublishModeQosPolicyKind kind)
     {
         publisher_attr_.qos.m_publishMode.kind = kind;

@@ -1066,6 +1066,7 @@ BLACKBOXTEST(BlackBox, AsyncPubSubWithFlowController64kb)
     uint32_t periodInMs = 1000; //1sec
 
     slowWriter.history_depth(2).
+        intraProcessEnabled(false).
         asynchronously(eprosima::fastrtps::ASYNCHRONOUS_PUBLISH_MODE).
         add_throughput_controller_descriptor_to_pparams(sizeToClear, periodInMs).init();
     ASSERT_TRUE(slowWriter.isInitialized());
@@ -1096,7 +1097,7 @@ BLACKBOXTEST(BlackBox, AsyncPubSubAsReliableData300kbInLossyConditions)
     // flow control not to overrun the receive buffer.
     uint32_t bytesPerPeriod = 300000;
     uint32_t periodInMs = 200;
-    writer.add_throughput_controller_descriptor_to_pparams(bytesPerPeriod, periodInMs);
+    writer.intraProcessEnabled(false).add_throughput_controller_descriptor_to_pparams(bytesPerPeriod, periodInMs);
 
     // To simulate lossy conditions, we are going to remove the default
     // bultin transport, and instead use a lossy shim layer variant.
@@ -1157,6 +1158,7 @@ BLACKBOXTEST(BlackBox, AsyncFragmentSizeTest)
         testTransport->sendBufferSize = 65536;
         testTransport->receiveBufferSize = 65536;
         writer.disable_builtin_transport();
+        writer.intraProcessEnabled(false);
         writer.add_user_transport_to_pparams(testTransport);
         writer.history_depth(10).asynchronously(eprosima::fastrtps::ASYNCHRONOUS_PUBLISH_MODE).init();
 
@@ -1203,6 +1205,7 @@ BLACKBOXTEST(BlackBox, AsyncFragmentSizeTest)
         testTransport->sendBufferSize = 65536;
         testTransport->receiveBufferSize = 65536;
         writer.disable_builtin_transport();
+        writer.intraProcessEnabled(false);
         writer.add_user_transport_to_pparams(testTransport);
         writer.history_depth(10).
             asynchronously(eprosima::fastrtps::ASYNCHRONOUS_PUBLISH_MODE).init();
