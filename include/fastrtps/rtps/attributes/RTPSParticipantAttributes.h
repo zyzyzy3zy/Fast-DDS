@@ -219,7 +219,7 @@ class RTPSParticipantAttributes
             use_IP6_to_send = false;
             participantID = -1;
             useBuiltinTransports = true;
-            useIntraProcess = true;
+            useIntraProcess = false;
 
 #if WIN32
             char intraEnv[10];
