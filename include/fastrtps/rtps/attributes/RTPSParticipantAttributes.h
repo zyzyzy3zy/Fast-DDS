@@ -27,7 +27,7 @@
 #include "../resources/ResourceManagement.h"
 
 #include <memory>
-#include <cstdlib> // std::getenv
+#include <stdlib.h> // getenv(_s)
 
 namespace eprosima {
 namespace fastrtps{
@@ -221,8 +221,14 @@ class RTPSParticipantAttributes
             useBuiltinTransports = true;
             useIntraProcess = true;
 
-            char* intraEnv = std::getenv("FASTRTPS_INTRA_PROCESS");
-            if (intraEnv != nullptr)
+#if WIN32
+            char intraEnv[10];
+            size_t len;
+            if(getenv_s(&len, intraEnv, "FASTRTPS_INTRA_PROCESS") == 0)
+#else
+            char* intraEnv = getenv("FASTRTPS_INTRA_PROCESS");
+            if(intraEnv != nullptr)
+#endif
             {
                 if (strcmp(intraEnv, "OFF") == 0)
                 {
