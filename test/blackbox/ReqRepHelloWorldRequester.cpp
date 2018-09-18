@@ -59,6 +59,7 @@ ReqRepHelloWorldRequester::~ReqRepHelloWorldRequester()
 void ReqRepHelloWorldRequester::init()
 {
     ParticipantAttributes pattr;
+    pattr.rtps.useIntraProcess = false;
     pattr.rtps.builtin.domainId = (uint32_t)GET_PID() % 230;
     participant_ = Domain::createParticipant(pattr);
     ASSERT_NE(participant_, nullptr);

@@ -1588,6 +1588,11 @@ BLACKBOXTEST(BlackBox, PubSubKeepAll)
 
     ASSERT_TRUE(reader.isInitialized());
 
+    // This test will fail on intra-process, as
+    // changes will be auto-acked, and thus can be removed
+    // from the writer's history
+    writer.intraProcessEnabled(false);
+
     writer.history_kind(eprosima::fastrtps::KEEP_ALL_HISTORY_QOS).
         max_blocking_time({0, 0}).
         resource_limits_allocated_samples(2).
@@ -1634,6 +1639,11 @@ BLACKBOXTEST(BlackBox, PubSubKeepAllTransient)
         resource_limits_max_samples(2).init();
 
     ASSERT_TRUE(reader.isInitialized());
+
+    // This test will fail on intra-process, as
+    // changes will be auto-acked, and thus can be removed
+    // from the writer's history
+    writer.intraProcessEnabled(false);
 
     writer.history_kind(eprosima::fastrtps::KEEP_ALL_HISTORY_QOS).
         durability_kind(eprosima::fastrtps::TRANSIENT_LOCAL_DURABILITY_QOS).
