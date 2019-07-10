@@ -298,8 +298,6 @@ uint16_t NetworkFactory::calculateWellKnownPort(const RTPSParticipantAttributes&
 
     if (port > 65535)
     {
-        logError(RTPS, "Calculated port number is too high. Probably the domainId is over 232, there are "
-            << "too much participants created or portBase is too high.");
         std::cout << "Calculated port number is too high. Probably the domainId is over 232, there are "
             << "too much participants created or portBase is too high." << std::endl;
         std::cout.flush();

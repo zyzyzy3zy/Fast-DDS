@@ -21,7 +21,7 @@
 #define _RTPS_BUILTIN_DATA_PARTICIPANTPROXYDATA_H_
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS_PUBLIC
-#include <mutex>
+//#include <mutex>
 #include "../../../qos/ParameterList.h"
 
 #include "../../attributes/WriterAttributes.h"

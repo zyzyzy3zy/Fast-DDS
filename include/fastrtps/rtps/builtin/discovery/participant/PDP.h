@@ -22,6 +22,7 @@
 #ifndef DOXYGEN_SHOULD_SKIP_THIS_PUBLIC
 
 #include <mutex>
+#include <atomic>
 #include "../../../common/Guid.h"
 #include "../../../attributes/RTPSParticipantAttributes.h"
 #include "../../../../qos/QosPolicies.h"

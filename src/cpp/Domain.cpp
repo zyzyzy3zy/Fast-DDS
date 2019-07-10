@@ -45,7 +45,6 @@ using namespace eprosima::fastrtps::xmlparser;
 namespace eprosima {
 namespace fastrtps {
 
-std::mutex Domain::m_mutex;
 std::vector<Domain::t_p_Participant> Domain::m_participants;
 bool Domain::default_xml_profiles_loaded = false;
 
@@ -63,7 +62,6 @@ Domain::~Domain()
 void Domain::stopAll()
 {
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
         while (m_participants.size() > 0)
         {
             delete(m_participants.back().second);
@@ -85,8 +83,6 @@ bool Domain::removeParticipant(Participant* part)
 {
     if(part!=nullptr)
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
-
         for(auto it = m_participants.begin();it!= m_participants.end();++it)
         {
             if(it->second->getGuid() == part->getGuid())
@@ -105,8 +101,6 @@ bool Domain::removePublisher(Publisher* pub)
 {
     if(pub!=nullptr)
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
-
         for(auto it = m_participants.begin();it!= m_participants.end();++it)
         {
             if(it->second->getGuid().guidPrefix == pub->getGuid().guidPrefix)
@@ -123,8 +117,6 @@ bool Domain::removeSubscriber(Subscriber* sub)
 {
     if(sub!=nullptr)
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
-
         for(auto it = m_participants.begin();it!= m_participants.end();++it)
         {
             if(it->second->getGuid().guidPrefix == sub->getGuid().guidPrefix)
@@ -178,7 +170,6 @@ Participant* Domain::createParticipant(
     pubsubpair.second = pspartimpl;
 
     {
-        std::lock_guard<std::mutex> guard(m_mutex);
         m_participants.push_back(pubsubpair);
     }
     return pubsubpar;
@@ -215,7 +206,6 @@ Publisher* Domain::createPublisher(
         const PublisherAttributes& att,
         PublisherListener* listen)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
     for (auto it = m_participants.begin(); it != m_participants.end(); ++it)
     {
         if(it->second->getGuid() == part->getGuid())
@@ -269,7 +259,6 @@ Subscriber* Domain::createSubscriber(
         const SubscriberAttributes& att,
         SubscriberListener* listen)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
     for (auto it = m_participants.begin(); it != m_participants.end(); ++it)
     {
         if(it->second->getGuid() == part->getGuid())
@@ -285,7 +274,6 @@ bool Domain::getRegisteredType(
         const char* typeName,
         TopicDataType** type)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
     for (auto it = m_participants.begin(); it != m_participants.end();++it)
     {
         if(it->second->getGuid() == part->getGuid())
@@ -300,7 +288,6 @@ bool Domain::registerType(
         Participant* part,
         TopicDataType* type)
 {
-    std::lock_guard<std::mutex> guard(m_mutex);
     //TODO El registro debería hacerse de manera que no tengamos un objeto del usuario sino que tengamos un objeto TopicDataTYpe propio para que no
     //haya problemas si el usuario lo destruye antes de tiempo.
     for (auto it = m_participants.begin(); it != m_participants.end();++it)
@@ -361,7 +348,6 @@ bool Domain::unregisterType(
 {
     //TODO El registro debería hacerse de manera que no tengamos un objeto del usuario sino que tengamos un objeto TopicDataTYpe propio para que no
     //haya problemas si el usuario lo destruye antes de tiempo.
-    std::lock_guard<std::mutex> guard(m_mutex);
     for (auto it = m_participants.begin(); it != m_participants.end();++it)
     {
         if(it->second->getGuid() == part->getGuid())

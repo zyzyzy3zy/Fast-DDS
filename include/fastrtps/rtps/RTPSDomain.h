@@ -26,7 +26,6 @@
 #include "attributes/RTPSParticipantAttributes.h"
 
 #include <atomic>
-#include <mutex>
 #include <set>
 
 namespace eprosima{
@@ -147,8 +146,6 @@ class RTPSDomain
         static inline uint32_t getNewId() { return m_maxRTPSParticipantID++; }
 
         static void removeRTPSParticipant_nts(std::vector<t_p_RTPSParticipant>::iterator it);
-
-        static std::mutex m_mutex;
 
         static std::atomic<uint32_t> m_maxRTPSParticipantID;
 

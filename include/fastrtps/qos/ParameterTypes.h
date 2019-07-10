@@ -529,7 +529,7 @@ class ParameterPropertyList_t : public Parameter_t {
          * @param[in,out] msg Pointer to the message where the parameter should be added.
          * @return True if the parameter was correctly added.
          */
-        bool addToCDRMessage(rtps::CDRMessage_t* msg) override;
+        RTPS_DllAPI bool addToCDRMessage(rtps::CDRMessage_t* msg) override;
 };
 
 /**
