@@ -30,13 +30,9 @@ system input/output channel combination for each deployment.
 * Robotics: ROS (Robotic Operating System) as their default middleware for ROS2.
 * EU R&D: FIWARE Incubated GE.
 
-<br/>
-
-**Want us to share your project with the community?  
-Write to Evaluation.Support@eprosima.com or mention @EProsima on Twitter.  
-We are curious to get to know your use case!**
-
-<br/>
+## Want us to share your project with the community?  
+Write to evaluation.support@eprosima.com or mention @EProsima on Twitter.  
+We are curious to get to know your use case!
 
 ## Supported platforms
 
