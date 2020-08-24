@@ -24,6 +24,7 @@
 using namespace eprosima;
 using namespace eprosima::fastdds::dds;
 
+
 DomainParticipant::DomainParticipant(
         const StatusMask& mask)
     : Entity(mask)
@@ -174,6 +175,13 @@ ReturnCode_t DomainParticipant::delete_topic(
         Topic* topic)
 {
     return impl_->delete_topic(topic);
+}
+
+Topic* DomainParticipant::find_topic(
+        const std::string& topic_name,
+        const Duration_t& timeout)
+{
+    return impl_->find_topic(topic_name, timeout);
 }
 
 TopicDescription* DomainParticipant::lookup_topicdescription(

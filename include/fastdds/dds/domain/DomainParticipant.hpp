@@ -32,9 +32,12 @@
 #include <fastdds/dds/core/Entity.hpp>
 #include <fastdds/dds/domain/qos/DomainParticipantQos.hpp>
 
+#include <fastdds/rtps/common/Time_t.h>
+
 #include <utility>
 
 using eprosima::fastrtps::types::ReturnCode_t;
+using Duration_t = eprosima::fastrtps::Duration_t;
 
 namespace dds {
 namespace domain {
@@ -267,6 +270,16 @@ public:
      */
     RTPS_DllAPI ReturnCode_t delete_topic(
             Topic* topic);
+
+    /**
+     * Look for an existing Topic.
+     * @param topic_name Name of the Topic.
+     * @param timeout Maximum time.
+     * @return Pointer to the Topic if found, otherwise nullptr
+     */
+    RTPS_DllAPI Topic* find_topic(
+        const std::string& topic_name,
+        const Duration_t& timeout);
 
     /**
      * Looks up an existing, locally created @ref TopicDescription, based on its name.

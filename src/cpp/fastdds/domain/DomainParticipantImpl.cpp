@@ -55,6 +55,11 @@
 
 #include <chrono>
 
+#include <fastrtps/utils/TimedConditionVariable.hpp>
+#include <fastrtps/utils/TimeConversion.h>
+#include <fastdds/rtps/common/Time_t.h>
+
+
 namespace eprosima {
 namespace fastdds {
 namespace dds {
@@ -80,6 +85,7 @@ using fastrtps::rtps::GUID_t;
 using fastrtps::rtps::EndpointKind_t;
 using fastrtps::rtps::ResourceEvent;
 using eprosima::fastdds::dds::Log;
+using Duration_t = eprosima::fastrtps::Duration_t;
 
 static void set_attributes_from_qos(
         fastrtps::rtps::RTPSParticipantAttributes& attr,
@@ -938,6 +944,28 @@ Topic* DomainParticipantImpl::create_topic_with_profile(
     }
 
     return nullptr;
+}
+
+Topic* DomainParticipantImpl::find_topic(
+        const std::string& topic_name,
+        const Duration_t& timeout)
+{
+    std::unique_lock<std::mutex> lock(mtx_topics_);
+
+    Topic* topic = nullptr;
+    std::chrono::microseconds max_wait(eprosima::fastrtps::rtps::TimeConv::Duration_t2MicroSecondsInt64(timeout));
+
+    cv_topic_.wait_for(lock, max_wait, [&]()
+    {
+        auto it = topics_.find(topic_name);
+
+        if (it != topics_.end())
+        {
+            topic = it->second->user_topic_;
+        }
+        return topic == nullptr;
+    });
+    return topic;
 }
 
 TopicDescription* DomainParticipantImpl::lookup_topicdescription(
