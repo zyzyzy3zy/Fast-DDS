@@ -83,6 +83,9 @@ struct SampleInfo
     //! time provided by the DataWriter when the sample was written
     fastrtps::rtps::Time_t source_timestamp;
 
+    //! Reception timestamp of the sample
+    fastrtps::rtps::Time_t reception_timestamp;
+
     //! identifies locally the corresponding instance
     fastrtps::rtps::InstanceHandle_t instance_handle;
 
