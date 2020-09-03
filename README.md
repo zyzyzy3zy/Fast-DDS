@@ -33,7 +33,7 @@ system input/output channel combination for each deployment.
 
 *eProsima Fast DDS* has been adopted by multiple organizations in many sectors including these important cases:
 
-* Robotics: ROS (Robotic Operating System) as their default middleware for ROS2.
+* Robotics: ROS (Robotic Operating System) as their default middleware for ROS 2.
 * EU R&D: FIWARE Incubated GE.
 
 This project is part of [FIWARE](https://www.fiware.org/). For more information check the FIWARE Catalogue entry for
@@ -173,6 +173,10 @@ Load the image and run it:
 	$ docker run -it ubuntu-fast-rtps
 
 You can run as many images as you want and check the communication between them.
+
+## Quality Declaration
+
+*eprosima Fast DDS* claims to be in the **Quality Level 2** category based on the guidelines provided by [ROS 2](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst). See the [Quality Declaration]() for more details.
 
 ## Getting Help
 

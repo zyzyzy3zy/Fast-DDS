@@ -1,3 +1,16 @@
+Version 2.0.1
+-------------
+
+This release includes the following **bug fixes**:
+
+* Fixed sending GAPs to late joiners
+* Fixed asserting liveliness on data reception
+* Avoid calling `OpenSSL_add_all_algorithms` when not required
+
+Other improvements:
+
+* Fixing warnings
+
 Version 2.0.0
 -------------
 
