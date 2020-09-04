@@ -116,6 +116,8 @@ Currently, *eprosima Fast DDS* does not have any Vulnerability Disclosure Policy
 
 A possible solution is to conform to the [ROS 2 Vulnerability Disclosure Policy](https://www.ros.org/reps/rep-2006.html)
 
+This point is only recommended for Quality Level 3, but it is REQUIRED for Quality Level 2 and above.
+
 ## Progress toward Quality Level 2
 
 Below the points that should be solved in order to qualify for the Quality Level 2 are addressed.
@@ -179,12 +181,15 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 
 ## Quality Level 3 Requirement Partially Met
 
+* Change requests [2.i]
 * Platform Support [6]
 
 ## Quality Level 2 Requirements Not Yet Met
 
+* API and ABI stability within a released ROS distribution [1.vi]
 * Using coverage [4.iii.a]
 * Use of static analysis tools [4.v.b]
+* Vulnerability Disclosure Policy [7.i]
 
 ## Quality Level 1 Requirements Not Yet Met
 
