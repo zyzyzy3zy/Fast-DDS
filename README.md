@@ -176,7 +176,7 @@ You can run as many images as you want and check the communication between them.
 
 ## Quality Declaration
 
-*eprosima Fast DDS* claims to be in the **Quality Level 2** category based on the guidelines provided by [ROS 2](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst). See the [Quality Declaration]() for more details.
+*eprosima Fast DDS* claims to be in the **Quality Level 3** category based on the guidelines provided by [ROS 2](https://github.com/ros-infrastructure/rep/blob/master/rep-2004.rst). See the [Quality Declaration](https://github.com/eProsima/Fast-DDS/blob/master/QUALITY.md) for more details.
 
 ## Getting Help
 
