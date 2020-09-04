@@ -225,7 +225,7 @@ The chart below compares the requirements in the [REP-2004](https://www.ros.org/
 |3.v.b| Centralized declaration available for peer review |○|
 |4| **Testing** | --- |
 |4.i| Feature items tests | ✓ |
-|4.ii| Public API tests | ○ |
+|4.ii| Public API tests | ✓ |
 |4.iii.a| Using coverage | ☓ |
 |4.iii.a| Coverage policy | ☓ |
 |4.iv.a| Performance tests (if applicable) | ✓ |
