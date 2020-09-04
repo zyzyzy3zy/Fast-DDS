@@ -215,15 +215,15 @@ The chart below compares the requirements in the [REP-2004](https://www.ros.org/
 |2.ii| Contributor origin (DCO, CLA, etc) | ✓|
 |2.iii| Peer review policy | ✓ |
 |2.iv| CI policy for change requests | ✓ |
-|2.v| Documentation policy for change requests | |
+|2.v| Documentation policy for change requests |☓|
 |3| **Documentation** | --- |
 |3.i| Per feature documentation | ✓ |
 |3.ii| Per public API item documentation | ✓ |
 |3.iii| Declared License(s) | ○ |
 |3.iv| Copyright in source files| ○ |
 |3.v.a| Quality declaration linked to README | ✓ |
-|3.v.b| Centralized declaration available for peer review |✓|
-|4| Testing | --- |
+|3.v.b| Centralized declaration available for peer review |○|
+|4| **Testing** | --- |
 |4.i| Feature items tests | ✓ |
 |4.ii| Public API tests | ○ |
 |4.iii.a| Using coverage | ☓ |
@@ -232,13 +232,13 @@ The chart below compares the requirements in the [REP-2004](https://www.ros.org/
 |4.iv.b| Performance tests policy| ☓ |
 |4.v.a| Code style enforcement (linters)| ○ |
 |4.v.b| Use of static analysis tools | ☓ |
-|5| Dependencies | --- |
+|5| **Dependencies** | --- |
 |5.i| Must not have ROS lower level dependencies | N/A |
 |5.ii| Optional ROS lower level dependencies| N/A |
 |5.iii| Justifies quality use of non-ROS dependencies |○|
-|6| Platform support | --- |
+|6| **Platform support** | --- |
 |6.i| Support targets Tier1 ROS platforms| ○ |
-|7| Security | --- |
+|7| **Security** | --- |
 |7.i| Vulnerability Disclosure Policy | ☓ |
 
 [//]: # (TODO JLBuenoLopez-eProsima I suggest removing from the chart those points exclusively related to ROS)
