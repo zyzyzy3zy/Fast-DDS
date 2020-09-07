@@ -100,8 +100,8 @@ Below you can find those suggestions related to each specific point:
  ### Platform Support [6]
 
  ROS 2 developers consider partially met this point because there is no evidence that *eprosima Fast DDS* supports all [Tier1 ROS platforms](https://www.ros.org/reps/rep-2000.html).
-
  Specifically, *eprosima Fast DDS* does not name linux-aarch64 between its [supported platforms](README.md#supported-platforms).
+ The OS supported in this particular platform for the Foxy Fitzroy Distribution is Ubuntu Focal (20.04).
 
  Additionally, *eprosima Fast DDS* does not run any test for that particular platform (CI, performance, feature, public API)
 

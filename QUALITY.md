@@ -1,4 +1,4 @@
-This document is a declaration of software quality for the *eprosima Fast DDS* library based on the guidelines provided in the [ROS 2 REP-2004 document](https://www.ros.org/reps/rep-2004.html).
+This document is a declaration of software quality for *eprosima Fast DDS* based on the guidelines provided in the [ROS 2 REP-2004 document](https://www.ros.org/reps/rep-2004.html).
 
 Quality Declaration
 =============================
@@ -21,8 +21,8 @@ However, *eprosima Fast DDS* version policy differs with some of the ROS-specifi
 
 ### Version Stability [1.ii]
 
-*eprosima Fast DDS* is at a stable version, i.e. `>=1.0.0`
-The current version can be found [here](https://github.com/eProsima/Fast-DDS/releases) and its change history can be found [here](versions.md).
+*eprosima Fast DDS* is at a stable version, i.e. `>=1.0.0`.
+The latest version can be found [here](https://github.com/eProsima/Fast-DDS/releases) and its change history can be found [here](versions.md).
 
 ### Public API Declaration [1.iii]
 
