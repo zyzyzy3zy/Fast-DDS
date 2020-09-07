@@ -135,7 +135,14 @@ The tests aim to cover typical usage.
 
 ### Coverage [4.iii]
 
-[//]: # (TODO JLBuenoLopez-eProsima There seems to be no automatic code coverage analysis being made or anything related)
+*eprosima Fast DDS* coverage reports can be accessed from the CI nightly results:
+
+* Linux [![Linux ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_linux/badge/icon?subject=%20%20%20Linux%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_linux)
+* Mac [![Mac ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/badge/icon?subject=%20%20%20%20%20%20%20Mac%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac)
+
+These reports provide statistics of line and conditional coverage. Currently the line coverage is around 58 % for Linux and 51 % for Mac platforms and the conditional coverage is around 30 % for both platforms.
+
+[//]: # (TODO JLBuenoLopez-eProsima Coverage for Windows?)
 
 [//]: # (TODO JLBuenoLopez-eProsima There are 2 requirements concerning this point:
 a. Must have code coverage tracking for the package.
@@ -226,7 +233,7 @@ The chart below compares the requirements in the [REP-2004](https://www.ros.org/
 |4| **Testing** | --- |
 |4.i| Feature items tests | ✓ |
 |4.ii| Public API tests | ✓ |
-|4.iii.a| Using coverage | ☓ |
+|4.iii.a| Using coverage | ✓ |
 |4.iii.b| Coverage policy | ☓ |
 |4.iv.a| Performance tests (if applicable) | ✓ |
 |4.iv.b| Performance tests policy| ☓ |

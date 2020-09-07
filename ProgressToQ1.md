@@ -45,7 +45,7 @@ The chart below compares *eprosima Fast DDS* current Quality Level with Quality 
 |4| **Testing** |||||||
 |4.i| Feature items tests |✓|✓|✓|●|●||
 |4.ii| Public API tests |✓|✓|||||
-|4.iii.a| Using coverage |☓|✓|✓||||
+|4.iii.a| Using coverage |✓|✓|✓||||
 |4.iii.a| Coverage policy |☓|✓|||||
 |4.iv.a| Performance tests (if applicable) |✓|✓|||||
 |4.iv.b| Performance tests policy|☓|✓|||||
@@ -129,12 +129,6 @@ This point is recommended for Quality Level 2 (and Quality Level 1) packages.
 It is only matter of time that the Quality Declaration becomes public and open to public discussion.
 The Quality Declaration is going to be discussed first internally before opening the discussion to peer-reviewing.
 
-### Using Coverage [4.iii.a]
-
-*eprosima Fast DDS* does not have any automatic code coverage analysis tool and does not currently conforms to the guidelines in this point (as far as I know)
-
-This point is REQUIRED to be considered for the Quality Level 2 category.
-
 ### Code style enforcement (Linters)[4.v.a]
 
 *eprosima Fast DDS* enforces code style using uncrustify.
@@ -187,7 +181,6 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 ## Quality Level 2 Requirements Not Yet Met
 
 * API and ABI stability within a released ROS distribution [1.vi]
-* Using coverage [4.iii.a]
 * Use of static analysis tools [4.v.b]
 * Vulnerability Disclosure Policy [7.i]
 
