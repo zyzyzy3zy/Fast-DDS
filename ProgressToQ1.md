@@ -167,7 +167,7 @@ Additionally, the change history contained in the versions.md file is not automa
 
 This point is REQUIRED to be considered for the Quality Level 1 category.
 
-### Coverage Policy [4.iii.a]
+### Coverage Policy [4.iii.b]
 
 *eprosima Fast DDS* does not use any coverage tool and consequently does not have any coverage policy.
 
@@ -179,7 +179,7 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 
 This point is REQUIRED to be considered for the Quality Level 1 category.
 
-## Quality Level 3 Requirement Partially Met
+## Quality Level 3 Requirements Partially Met
 
 * Change requests [2.i]
 * Platform Support [6]
@@ -194,5 +194,5 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 ## Quality Level 1 Requirements Not Yet Met
 
 * Documentation policy for change requests [2.v]
-* Coverage policy [4.iii.a]
+* Coverage policy [4.iii.b]
 * Performance test policy [4.iv.b]
