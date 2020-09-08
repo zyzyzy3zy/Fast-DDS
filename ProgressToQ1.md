@@ -21,8 +21,8 @@ The chart below compares *eprosima Fast DDS* current Quality Level with Quality 
 |Number| Requirement| Current State | Level 1 | Level 2 | Level 3 | Level 4 | Level 5 |
 |--|--|--|--|--|--|--|--|
 |1| **Version policy** |||||||
-|1.i|Version Policy available | ✓ | ✓ | ✓ | ✓ | ● ||
-|1.ii|Stable version |✓| ✓ | ✓ | ✓ | | |
+|1.i|Version Policy available |✓|✓|✓|✓|●||
+|1.ii|Stable version |✓|✓|✓|✓|||
 |1.iii|Declared public API|✓|✓|✓|●|||
 |1.iv|API stability policy|✓|✓|✓|✓|||
 |1.v|ABI stability policy|✓|✓|✓|✓|||
@@ -30,27 +30,27 @@ The chart below compares *eprosima Fast DDS* current Quality Level with Quality 
 |2| **Change control process** |||||||
 |2.i| All changes occur on change request |■|✓|✓|✓|●||
 |2.ii| Contributor origin (DCO, CLA, etc) |✓|✓|✓||||
-|2.iii| Peer review policy |✓|✓|||||
-|2.iv| CI policy for change requests |✓|✓|✓|✓|||
+|2.iii| Peer review policy |■|✓|||||
+|2.iv| CI policy for change requests |■|✓|✓|✓|||
 |2.v| Documentation policy for change requests |☓|✓|||||
 |3| **Documentation** |||||||
 |3.i| Per feature documentation |✓|✓|✓||||
 |3.ii| Per public API item documentation |✓|✓|||||
-|3.iii| Declared License(s) |■|✓|✓|✓|✓|●|
-|3.iv| Copyright in source files|■|✓|✓|✓|✓||
+|3.iii| Declared License(s) |✓|✓|✓|✓|✓|●|
+|3.iv| Copyright in source files|✓|✓|✓|✓|✓||
 |3.v| Quality Declaration|✓|✓|✓|○|||
 |3.v.a| Quality declaration linked to README |✓|✓|✓|✓|||
 |3.v.b| Centralized declaration available for peer review |■|●|●|○|||
 |3.v.c| Lists and Peer Review |N/A|✓|✓|✓||
 |4| **Testing** |||||||
-|4.i| Feature items tests |✓|✓|✓|●|●||
+|4.i| Feature items tests |■|✓|✓|●|●||
 |4.ii| Public API tests |✓|✓|||||
-|4.iii.a| Using coverage |✓|✓|✓||||
+|4.iii.a| Using coverage |■|✓|✓||||
 |4.iii.a| Coverage policy |☓|✓|||||
 |4.iv.a| Performance tests (if applicable) |✓|✓|||||
-|4.iv.b| Performance tests policy|☓|✓|||||
-|4.v.a| Code style enforcement (linters)|■|✓|✓||||
-|4.v.b| Use of static analysis tools |☓|✓|✓||||
+|4.iv.b| Performance tests policy|■|✓|||||
+|4.v.a| Code style enforcement (linters)|✓|✓|✓||||
+|4.v.b| Use of static analysis tools |■|✓|✓||||
 |5| **Dependencies** |||||||
 |5.i| Must not have ROS lower level dependencies |N/A|✓|✓||||
 |5.ii| Optional ROS lower level dependencies|N/A|○|○|○|||
@@ -75,23 +75,29 @@ Below you can find those suggestions related to each specific point:
  
  Therefore, if there is not a specific version pinned to each ROS Distribution, this point is not met.
  Having a specific version pinned to each ROS Distribution has the main disadvantage that each pinned version has to be supported the same time that its ROS Distribution (up to five years for some distributions).
+
+ **Task: Analyze which API is ROS using to establish which ABI cannot be broken.**
  
  ### Change Requests [2.i]
  
  This point is considered to be partially met because in the change history there has been some hotfix changes made without Pull Request.
  ROS 2 developers suggest that we have a Hotfix Policy that states in which cases is valid to use this method and how it is handled.
 
- ### License [3.iii]
+ **Task: Update CONTRIBUTING adding information about the Change Control Process taking as example the one hosted in [all-docs](https://github.com/eProsima/all-docs/blob/master/CONTRIBUTING.md)**
 
- ROS 2 developers would like that some tool ensures that the License header is included in all files.
+ This task should also deal and clarify the following points:
 
- Personally, I am not sure if our enforced code style using uncrustify checks and enforces this issue.
+ * All changes occur on change request [2.i]
+ * Contributor origin (DCO) [2.ii] (Already introduced)
+ * Peer review policy [2.iii]
+ * CI policy for change requests [2.iv]
+ * [Documentation policy for change requests [2.v]](ProgressToQ1.md#documentation-policy-2v)
 
- ### Copyright Statements [3.iv]
+ Additionally, it should be linked or deal also with the following points:
 
- ROS 2 developers would like that some tool ensures that the copyright statement is included in all files.
-
- Personally, I am not sure if our enforced code style using uncrustify checks and enforces this issue.
+ * Coverage policy for new changes [4.iii.b]
+ * [Performance regression policy [4.iv.b]](ProgressToQ1.md#performance-test-policy-4ivb)
+ * Use of static analysis tools for code style enforcement [4.v.b]
 
  ### Lists and Peer Review [3.v.c]
 
@@ -108,7 +114,10 @@ Below you can find those suggestions related to each specific point:
  ROS 2 developers would also like to know which OS *eprosima Fast DDS* supports.
 
  This point is REQUIRED to be considered for the Quality Level 3 category.
- Maybe this is the first issue that must be addressed to avoid any doubts about claiming to be considered Quality Level 3.
+
+**Task: Define Tier platforms and OS for *eprosima Fast DDS* adding the corresponding file to the repository and linking to the README and QUALITY DECLARATION**
+
+**Task: Add CI support for aarch64 with Ubuntu Focal in Jenkins (nightly and manual linked to pull requests). Include also coverage report.**
 
 ### Vulnerability Disclosure Policy [7.i]
 
@@ -117,6 +126,8 @@ Currently, *eprosima Fast DDS* does not have any Vulnerability Disclosure Policy
 A possible solution is to conform to the [ROS 2 Vulnerability Disclosure Policy](https://www.ros.org/reps/rep-2006.html)
 
 This point is only recommended for Quality Level 3, but it is REQUIRED for Quality Level 2 and above.
+
+**Task: Prepare the Vulnerability Disclosure Policy based on the [ROS 2 one](https://www.ros.org/reps/rep-2006.html)**
 
 ## Progress toward Quality Level 2
 
@@ -129,22 +140,22 @@ This point is recommended for Quality Level 2 (and Quality Level 1) packages.
 It is only matter of time that the Quality Declaration becomes public and open to public discussion.
 The Quality Declaration is going to be discussed first internally before opening the discussion to peer-reviewing.
 
-### Code style enforcement (Linters)[4.v.a]
-
-*eprosima Fast DDS* enforces code style using uncrustify.
-I am not sure if this is public knowledge because ROS 2 developers have not mentioned this in their first Quality Declaration assesment.
-
 ### Use of Static Analysis Tools [4.v.b]
 
-*eprosima Fast DDS* does not use any static analysis tool as far as I know.
-(ROS 2 developers have not found any evidence of any tool related in their first assesment).
+*eprosima Fast DDS* enforces the code style by running Uncrustify tests on each pull request. The code style is only enforced in the new changes being submitted. Therefore, the tendency will be to homogenize the older source files to the code style.
 
 This point is REQUIRED to be considered for the Quality Level 2 category.
+
+**Task: Update and translate [README](https://github.com/eProsima/cpp-style/blob/master/README.es.md) in cpp-style repository**
 
 ### Direct Runtime non-ROS Dependency [5.iii]
 
 This point is considered to be partially fulfilled but it is early to have a complete assesment.
 First, the Quality Declaration for the dependencies must be drafted and studied.
+
+**Task: Prepare Quality Declaration and Roadmap for FastCDR**
+
+**Task: Prepare Quality Declaration and Roadmap for foonathan_memory**
 
 ## Progress toward Quality Level 1
 
@@ -163,7 +174,9 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 
 ### Coverage Policy [4.iii.b]
 
-*eprosima Fast DDS* does not use any coverage tool and consequently does not have any coverage policy.
+**Task: prepare a Coverage Policy. Analyze the results of the current coverage report and propose achievable goals to improve.**
+
+**Task: add coverage report to Windows in Jenkins**
 
 This point is REQUIRED to be considered for the Quality Level 1 category.
 
@@ -175,17 +188,15 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 
 ## Quality Level 3 Requirements Partially Met
 
-* Change requests [2.i]
-* Platform Support [6]
+* [Change requests [2.i]](ProgressToQ1.md#change-requests-2i)
+* [Platform Support [6]](ProgressToQ1.md#platform-support-6)
 
 ## Quality Level 2 Requirements Not Yet Met
 
-* API and ABI stability within a released ROS distribution [1.vi]
-* Use of static analysis tools [4.v.b]
-* Vulnerability Disclosure Policy [7.i]
+* [API and ABI stability within a released ROS distribution [1.vi]](ProgressToQ1.md#api-and-abi-stability-within-a-released-ros-distribution-1vi)
+* [Use of static analysis tools [4.v.b]](ProgressToQ1.md#use-of-static-analysis-tools-4vb)
+* [Vulnerability Disclosure Policy [7.i]](ProgressToQ1.md#vulnerability-disclosure-policy-7i)
 
 ## Quality Level 1 Requirements Not Yet Met
 
-* Documentation policy for change requests [2.v]
-* Coverage policy [4.iii.b]
-* Performance test policy [4.iv.b]
+* [Coverage policy [4.iii.b]](ProgressToQ1.md#coverage-policy-4iiib)

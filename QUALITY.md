@@ -1,4 +1,4 @@
-This document is a declaration of software quality for *eprosima Fast DDS* based on the guidelines provided in the [ROS 2 REP-2004 document](https://www.ros.org/reps/rep-2004.html).
+This document is a declaration of software quality for *eprosima Fast DDS* inspired on the guidelines provided in the [ROS 2 REP-2004 document](https://www.ros.org/reps/rep-2004.html).
 
 Quality Declaration
 =============================
@@ -9,15 +9,13 @@ as defined and maintained by the Object Management Group (OMG) consortium.
 
 *eprosima Fast DDS* claims to be in the **Quality Level 3** category.
 
-Below are the rationales, notes and caveats for this claim, organized by each requirement listed in the [Package Requirements for Quality Level 1 in REP-2004](https://www.ros.org/reps/rep-2004.html#package-requirements).
+Below are the rationales, notes and caveats for this claim, organized by the requirements listed in the [Package Requirements for Quality Level 1 in REP-2004](https://www.ros.org/reps/rep-2004.html#package-requirements).
 
 ## Version Policy [1]
 
 ### Version Scheme [1.i]
 
-The **Versioning Policy Declaration** for *eprosima Fast DDS* can be found [here](VERSIONING.md).
-It adheres to `semver`, which is also used by ROS 2 Core packages as stated in the [ROS 2 Developer Guide](https://index.ros.org/doc/ros2/Contributing/Developer-Guide/#versioning).
-However, *eprosima Fast DDS* version policy differs with some of the ROS-specific rules, specifically, the ABI is not considered part of the public interface and any ABI break should be released in minor versions.
+The **Versioning Policy Declaration** for *eprosima Fast DDS* can be found [here](VERSIONING.md) and it adheres to [`semver`](https://semver.org/).
 
 ### Version Stability [1.ii]
 
@@ -36,26 +34,22 @@ The latest version can be found [here](https://github.com/eProsima/Fast-DDS/rele
 
 Any ABI break in *eprosima Fast DDS* will be done between minor versions and it should be clearly stated on the release notes.
 
-### API and ABI Stability Within a Released ROS Distribution [1.vi]
-
-[//]: # (TODO JLBuenoLopez-eProsima This specific point is so ROS related that maybe it does not make sense to keep in this Declaration. The external declaration for ROS will consider if we meet his specifications)
+[//]: # (TODO Analyze public API & ABI used by ROS 2)
 
 ## Change Control Process [2]
 
 The stability of *eprosima Fast DDS* is ensured through review, CI and tests.
 All commits must be signed by the author as stated in [CONTRIBUTING](CONTRIBUTING.md).
 
-All changes to *eprosima Fast DDS* occur through pull requests that are required to pass all CI test (unless there is enough evidence that the failure is unrelated to the change).
+All changes to *eprosima Fast DDS* occur through pull requests that are required to pass all CI tests.
+In case of failure, only maintainers can merge the pull request, and only when there is enough evidence that the failure is unrelated to the change.
+Additionally, all pull request must have a positive review from one other contributor that did not author the pull request.
 
-[//]: # (TODO JLBuenoLopez-eProsima I am not sure about the following statement)
-
-Only the Commiters can merge a pull request.
+[//]: # (TODO Update Contributing following and adapting the guidelines of https://github.com/eProsima/all-docs/blob/master/CONTRIBUTING.md)
 
 ### Change Requests [2.i]
 
 All changes will occur through a pull request.
-
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 developers have suggested to include a hotfix policy because there has been done over the *eprosima Fast DDS* history)
 
 ### Contributor Origin [2.ii]
 
@@ -67,7 +61,7 @@ All pull request will be peer-reviewed by at least one other contributor who did
 
 ### Continuous Integration [2.iv]
 
-All pull request must pass CI to be considered for merging (unless the Committers consider that there is enough evidence that the failure is unrelated to the changes).
+All pull request must pass CI to be considered for merging, unless maintainers consider that there is enough evidence that the failure is unrelated to the changes.
 CI testing is automatically triggered by incoming pull requests .
 Current nightly results can be seen here for all supported platforms:
 
@@ -75,13 +69,13 @@ Current nightly results can be seen here for all supported platforms:
 * Windows [![Windows ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141/badge/icon?subject=%20%20%20%20Windows%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141)
 * Mac [![Mac ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/badge/icon?subject=%20%20%20%20%20%20%20Mac%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 is requiring to support all tier 1 platforms. Currently we are not supporting linux-aarch64_release)
+[//]: # (TODO Add Ubuntu Focal (20.04) for linux-aarch64 platform)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 developers would want to know the specific OS information)
+[//]: # (TODO Define the OS that are supported in each platform)
 
 ### Documentation Policy [2.v]
 
-[//]: # (TODO JLBuenoLopez-eProsima Currently there is no Documentation Policy enforced in *eprosima Fast DDS* repository)
+[//]: # (TODO Update Contributing following and adapting the guidelines of https://github.com/eProsima/all-docs/blob/master/CONTRIBUTING.md)
 
 ## Documentation [3]
 
@@ -98,21 +92,17 @@ Current nightly results can be seen here for all supported platforms:
 The license for *eprosima Fast DDS* is Apache 2.0, and a summary can be found in each source file.
 A full copy of the license can be found [here](LICENSE).
 
-[//]: # (TODO JLBuenoLopez-eProsima As far as I know there is no linter automated test that ensures that each file has the license statement)
-
 There is some third-party content included with *eprosima Fast DDS* which is distributed under the [Boost Software License version 1.0](http://www.boost.org/LICENSE_1_0.txt) and [Zlib license](https://github.com/leethomason/tinyxml2/blob/8c8293ba8969a46947606a93ff0cb5a083aab47a/readme.md#license).
 
 ### Copyright Statements [3.iv]
 
 *eprosima Fast DDS* copyright holder provide a statement of copyright in each source file.
 
-[//]: # (TODO JLBuenoLopez-eProsima As far as I know there is no linter automated test that ensures that each file has the copyright included)
-
 ## Testing [4]
 
 ### Feature Testing [4.i]
 
-Each feature in *eprosima Fas DDS* has corresponding tests which simulate typical usage, and they are located in the `test` directory.
+Each feature in *eprosima Fast DDS* has corresponding tests which simulate typical usage, and they are located in the [`test` directory](test).
 New features are required to have tests before being added.
 Current nightly results can be found here:
 
@@ -120,60 +110,55 @@ Current nightly results can be found here:
 * Windows [![Windows ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141/badge/icon?subject=%20%20%20%20Windows%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141)
 * Mac [![Mac ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/badge/icon?subject=%20%20%20%20%20%20%20Mac%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 is requiring to support all tier 1 platforms. Currently we are not supporting linux-aarch64_release)
+[//]: # (TODO Add Ubuntu Focal (20.04) for linux-aarch64 platform)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 developers would want to know the specific OS information)
+[//]: # (TODO Define the OS that are supported in each platform)
 
 ### Public API Testing [4.ii]
 
 Each part of the public API has tests, and new additions or changes to the public API require tests before being added.
-The tests aim to cover typical usage.
-
-[//]: # (TODO JLBuenoLopez-eProsima I am unsure if the tests also cover corner cases.)
-
-[//]: # (TODO JLBuenoLopez-eProsima As far as I know there is no coverage done to ensure a complete testing.)
+The tests aim to cover typical usage. Currently, efforts are being made to improve our code coverage statistics in order to test corner cases.
 
 ### Coverage [4.iii]
 
 *eprosima Fast DDS* coverage reports can be accessed from the CI nightly results:
 
-* Linux [![Linux ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_linux/badge/icon?subject=%20%20%20Linux%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_linux)
-* Mac [![Mac ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/badge/icon?subject=%20%20%20%20%20%20%20Mac%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac)
+* [Linux Coverage Report](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_linux/cobertura)
+* [Mac Coverage Report](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/cobertura)
+
+[//]: # (TODO Coverage for Windows & Linux-aarch64)
 
 These reports provide statistics of line and conditional coverage. Currently the line coverage is around 58 % for Linux and 51 % for Mac platforms and the conditional coverage is around 30 % for both platforms.
 
-[//]: # (TODO JLBuenoLopez-eProsima Coverage for Windows?)
-
-[//]: # (TODO JLBuenoLopez-eProsima There are 2 requirements concerning this point:
-a. Must have code coverage tracking for the package.
-b. Must have and enforce a code coverage policy for new changes)
+Changes are required to make a best effort to keep or increase coverage before being accepted, but decreases are allowed if properly justified and accepted by maintainers.
 
 ### Performance [4.iv]
 
 *eprosima Fast DDS* provides a test directory specifically dedicated to performance that can be found [here](test/performance).
+Performace tests are automatically run after merging to the master branch of the project.
+If there has been any performance regression a notification is issued to maintainers that will study and decide how to proceed.
 
-[//]: # (TODO JLBuenoLopez-eProsima There is a second issue:
-b. Must have a performance regression policy)
+Latest latency performance test results can be accesed [here](http://jenkins.eprosima.com:8080/job/FastRTPS_latency_performance/lastBuild/) and latest throughput performance test results can be seen [here](http://jenkins.eprosima.com:8080/job/fastrtps_throughput_performance/lastBuild/).
+
+Furthermore, [*eprosima benchmarking* project](https://github.com/eProsima/benchmarking) provides tools to run performance tests and methodology to analyze and present the results:
+
+* [Latency Performance Test Specification](https://github.com/eProsima/benchmarking/blob/master/fastrtps_automated_benchmark/latency/README.md)
+* [Throughput Performance Test Specification](https://github.com/eProsima/benchmarking/blob/master/fastrtps_automated_benchmark/throughput/README.md)
 
 ### Linters and Static Analysis [4.v]
 
-*eprosima Fast DDS* has a code style that it is enforced using uncrustify.
+*eprosima Fast DDS* has a [code style](https://github.com/eProsima/cpp-style/blob/master/README.es.md) that it is enforced using *Uncrustify*.
+Among the CI tests there are tests that ensures that every pull request is compliant with the code style.
+The latest pull request results can be seen [here](http://jenkins.eprosima.com:8080/job/fastdds_github_uncrustify/lastBuild).
+The tests only check files where changes have been made.
+Therefore, the code style is only enforced in some files.
+However, the tendency will be to homogenize the older source files to the code style.
 
-[//]: # (TODO JLBuenoLopez-eProsima There is no linters nor automatic static analysis being done on the code developed.)
+[//]: # (TODO Translate cpp_style README from Spanish to English.)
 
 ## Dependencies [5]
 
-### Direct Runtime ROS Dependencies [5.i]
-
-[//]: # (TODO JLBuenoLopez-eProsima This specific point is so ROS related that maybe it does not make sense to keep in this Declaration. The external declaration for ROS will consider if we meet his specifications)
-
-### Optional Direct Runtime ROS Dependencies [5.ii]
-
-[//]: # (TODO JLBuenoLopez-eProsima This specific point is so ROS related that maybe it does not make sense to keep in this Declaration. The external declaration for ROS will consider if we meet his specifications)
-
-### Direct Runtime non-ROS Dependency [5.iii]
-
-[//]: # (TODO JLBuenoLopez-eProsima I suggest renaming this part leaving non-ROS out of the title)
+### Direct Runtime Dependencies [5.iii]
 
 *eprosima Fast DDS* depends on the following packages:
 
@@ -187,7 +172,7 @@ Therefore, these dependencies can be considered Quality Level 1 following the [a
 
 The other two dependencies are installed from the eProsima repositories and their current Quality Declarations can be found
 
-[//]: # (TODO JLBuenoLopez-eProsima Complete when the Quality Declarations are available)
+[//]: # (TODO Complete when the Quality Declarations for FastCDR and foonathan_memory are available)
 
 ## Platform Support [6]
 
@@ -197,13 +182,13 @@ The other two dependencies are installed from the eProsima repositories and thei
 * Windows [![Windows ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141/badge/icon?subject=%20%20%20%20Windows%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_windows/label=windows-secure,platform=x64,toolset=v141)
 * Mac [![Mac ci](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac/badge/icon?subject=%20%20%20%20%20%20%20Mac%20CI%20)](http://jenkins.eprosima.com:8080/job/nightly_fastdds_sec_master_mac)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 is requiring to support all tier 1 platforms. Currently we are not supporting linux-aarch64_release)
+[//]: # (TODO Add Ubuntu Focal (20.04) for linux-aarch64 platform)
 
-[//]: # (TODO JLBuenoLopez-eProsima ROS 2 developers would want to know the specific OS information)
+[//]: # (TODO Define the OS that are supported in each platform)
 
 ## Vulnerability Disclosure Policy [7.i]
 
-[//]: # (TODO JLBuenoLopez-eProsima Currently we do not have any Vulnerability Disclosure Policy. A possible solution is to conform to the ROS 2 one.)
+[//]: # (TODO Write Vulnerability Disclosure Policy and add to the project.)
 
 # Current Status Summary
 
@@ -211,41 +196,41 @@ The chart below compares the requirements in the [REP-2004](https://www.ros.org/
 |Number| Requirement| Current State |
 |--|--|--|
 |1| **Version policy** |---|
-|1.i|Version Policy available | ✓ |
+|1.i|Version Policy available |✓|
 |1.ii|Stable version |✓|
 |1.iii|Declared public API|✓|
 |1.iv|API stability policy|✓|
 |1.v|ABI stability policy|✓|
-|1.vi|API/ABI stable within ROS distribution|N/A|
+|1.vi|API/ABI stable within ROS distribution|N/A ○|
 |2| **Change control process** |---|
-|2.i| All changes occur on change request | ○|
-|2.ii| Contributor origin (DCO, CLA, etc) | ✓|
-|2.iii| Peer review policy | ✓ |
-|2.iv| CI policy for change requests | ✓ |
-|2.v| Documentation policy for change requests |☓|
+|2.i| All changes occur on change request |○|
+|2.ii| Contributor origin (DCO, CLA, etc) |✓|
+|2.iii| Peer review policy |○|
+|2.iv| CI policy for change requests |○|
+|2.v| Documentation policy for change requests |○|
 |3| **Documentation** | --- |
-|3.i| Per feature documentation | ✓ |
-|3.ii| Per public API item documentation | ✓ |
-|3.iii| Declared License(s) | ○ |
-|3.iv| Copyright in source files| ○ |
-|3.v.a| Quality declaration linked to README | ✓ |
+|3.i| Per feature documentation |✓|
+|3.ii| Per public API item documentation |✓|
+|3.iii| Declared License(s) |✓|
+|3.iv| Copyright in source files|✓|
+|3.v.a| Quality declaration linked to README |✓|
 |3.v.b| Centralized declaration available for peer review |○|
 |4| **Testing** | --- |
-|4.i| Feature items tests | ✓ |
-|4.ii| Public API tests | ✓ |
-|4.iii.a| Using coverage | ✓ |
-|4.iii.b| Coverage policy | ☓ |
-|4.iv.a| Performance tests (if applicable) | ✓ |
-|4.iv.b| Performance tests policy| ☓ |
-|4.v.a| Code style enforcement (linters)| ○ |
-|4.v.b| Use of static analysis tools | ☓ |
+|4.i| Feature items tests |○|
+|4.ii| Public API tests |✓|
+|4.iii.a| Using coverage |○|
+|4.iii.b| Coverage policy |☓|
+|4.iv.a| Performance tests (if applicable) |✓|
+|4.iv.b| Performance tests policy|○|
+|4.v.a| Code style enforcement (linters)|✓|
+|4.v.b| Use of static analysis tools |○|
 |5| **Dependencies** | --- |
-|5.i| Must not have ROS lower level dependencies | N/A |
-|5.ii| Optional ROS lower level dependencies| N/A |
+|5.i| Must not have ROS lower level dependencies |N/A|
+|5.ii| Optional ROS lower level dependencies|N/A|
 |5.iii| Justifies quality use of non-ROS dependencies |○|
 |6| **Platform support** | --- |
-|6.i| Support targets Tier1 ROS platforms| ○ |
+|6.i| Support targets Tier1 ROS platforms|○|
 |7| **Security** | --- |
-|7.i| Vulnerability Disclosure Policy | ☓ |
+|7.i| Vulnerability Disclosure Policy |☓|
 
 [//]: # (TODO JLBuenoLopez-eProsima I suggest removing from the chart those points exclusively related to ROS)
