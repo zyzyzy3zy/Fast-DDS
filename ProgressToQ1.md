@@ -76,14 +76,14 @@ Below you can find those suggestions related to each specific point:
  Therefore, if there is not a specific version pinned to each ROS Distribution, this point is not met.
  Having a specific version pinned to each ROS Distribution has the main disadvantage that each pinned version has to be supported the same time that its ROS Distribution (up to five years for some distributions).
 
- **Task: Analyze which API is ROS using to establish which ABI cannot be broken.**
+ **[Task #9265](https://eprosima.easyredmine.com/issues/9265): Analyze which API is ROS using to establish which ABI cannot be broken.**
  
  ### Change Requests [2.i]
  
  This point is considered to be partially met because in the change history there has been some hotfix changes made without Pull Request.
  ROS 2 developers suggest that we have a Hotfix Policy that states in which cases is valid to use this method and how it is handled.
 
- **Task: Update CONTRIBUTING adding information about the Change Control Process taking as example the one hosted in [all-docs](https://github.com/eProsima/all-docs/blob/master/CONTRIBUTING.md)**
+ **[Task #9262](https://eprosima.easyredmine.com/issues/9262): Update CONTRIBUTING adding information about the Change Control Process taking as example the one hosted in [all-docs](https://github.com/eProsima/all-docs/blob/master/CONTRIBUTING.md)**
 
  This task should also deal and clarify the following points:
 
@@ -115,9 +115,9 @@ Below you can find those suggestions related to each specific point:
 
  This point is REQUIRED to be considered for the Quality Level 3 category.
 
-**Task: Define Tier platforms and OS for *eprosima Fast DDS* adding the corresponding file to the repository and linking to the README and QUALITY DECLARATION**
+**[Task #9263](https://eprosima.easyredmine.com/issues/9263): Define Tier platforms and OS for *eprosima Fast DDS* adding the corresponding file to the repository and linking to the README and QUALITY DECLARATION**
 
-**Task: Add CI support for aarch64 with Ubuntu Focal in Jenkins (nightly and manual linked to pull requests). Include also coverage report.**
+**[Task #9264](https://eprosima.easyredmine.com/issues/9264): Add CI support for aarch64 with Ubuntu Focal in Jenkins (nightly and manual linked to pull requests). Include also coverage report.**
 
 ### Vulnerability Disclosure Policy [7.i]
 
@@ -127,7 +127,7 @@ A possible solution is to conform to the [ROS 2 Vulnerability Disclosure Policy]
 
 This point is only recommended for Quality Level 3, but it is REQUIRED for Quality Level 2 and above.
 
-**Task: Prepare the Vulnerability Disclosure Policy based on the [ROS 2 one](https://www.ros.org/reps/rep-2006.html)**
+**[Task #9267](https://eprosima.easyredmine.com/issues/9267): Prepare the Vulnerability Disclosure Policy based on the [ROS 2 one](https://www.ros.org/reps/rep-2006.html)**
 
 ## Progress toward Quality Level 2
 
@@ -146,7 +146,7 @@ The Quality Declaration is going to be discussed first internally before opening
 
 This point is REQUIRED to be considered for the Quality Level 2 category.
 
-**Task: Update and translate [README](https://github.com/eProsima/cpp-style/blob/master/README.es.md) in cpp-style repository**
+**[Task #9266](https://eprosima.easyredmine.com/issues/9266): Update and translate [README](https://github.com/eProsima/cpp-style/blob/master/README.es.md) in cpp-style repository**
 
 ### Direct Runtime non-ROS Dependency [5.iii]
 
@@ -176,7 +176,7 @@ This point is REQUIRED to be considered for the Quality Level 1 category.
 
 **Task: prepare a Coverage Policy. Analyze the results of the current coverage report and propose achievable goals to improve.**
 
-**Task: add coverage report to Windows in Jenkins**
+**[Task #9268](https://eprosima.easyredmine.com/issues/9268): add coverage report to Windows in Jenkins**
 
 This point is REQUIRED to be considered for the Quality Level 1 category.
 
