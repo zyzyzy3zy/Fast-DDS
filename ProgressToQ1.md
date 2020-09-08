@@ -99,6 +99,8 @@ Below you can find those suggestions related to each specific point:
  * [Performance regression policy [4.iv.b]](ProgressToQ1.md#performance-test-policy-4ivb)
  * Use of static analysis tools for code style enforcement [4.v.b]
 
+ **Task: Currently the coverage report is done only over the nightly CI tests. Therefore, there is no coverage policy for new changes that can be enforced right now. This should be discussed in the next Sprint meeting.**
+
  ### Lists and Peer Review [3.v.c]
 
  This point is considered N/A as of now because it is too early to consider.
