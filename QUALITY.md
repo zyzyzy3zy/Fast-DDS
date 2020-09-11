@@ -147,14 +147,12 @@ Furthermore, [*eprosima benchmarking* project](https://github.com/eProsima/bench
 
 ### Linters and Static Analysis [4.v]
 
-*eprosima Fast DDS* has a [code style](https://github.com/eProsima/cpp-style/blob/master/README.es.md) that it is enforced using *Uncrustify*.
+*eprosima Fast DDS* has a [code style](https://github.com/eProsima/cpp-style) that it is enforced using *Uncrustify*.
 Among the CI tests there are tests that ensures that every pull request is compliant with the code style.
 The latest pull request results can be seen [here](http://jenkins.eprosima.com:8080/job/fastdds_github_uncrustify/lastBuild).
 The tests only check files where changes have been made.
 Therefore, the code style is only enforced in some files.
 However, the tendency will be to homogenize the older source files to the code style.
-
-[//]: # (TODO Translate cpp_style README from Spanish to English.)
 
 ## Dependencies [5]
 

@@ -148,7 +148,7 @@ The Quality Declaration is going to be discussed first internally before opening
 
 This point is REQUIRED to be considered for the Quality Level 2 category.
 
-**[Task #9266](https://eprosima.easyredmine.com/issues/9266): Update and translate [README](https://github.com/eProsima/cpp-style/blob/master/README.es.md) in cpp-style repository**
+**[Task #9297](https://eprosima.easyredmine.com/issues/9297): Pending revision and approval of the [pull request](https://github.com/eProsima/cpp-style/pull/3)**
 
 ### Direct Runtime non-ROS Dependency [5.iii]
 
