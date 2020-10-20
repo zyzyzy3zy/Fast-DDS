@@ -354,7 +354,7 @@ public:
      * @return true if the change is relevant, false otherwise.
      */
     bool rtps_is_relevant(
-            CacheChange_t* change);
+            CacheChange_t* change) const;
 
     /**
      * Get the highest fully acknowledged sequence number.

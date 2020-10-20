@@ -116,24 +116,25 @@ bool WriterHistory::add_change_(
 }
 
 bool WriterHistory::matches_change(
-        const CacheChange_t* chi,
-        CacheChange_t* cho)
+        const CacheChange_t* inner_change,
+        CacheChange_t* outer_change)
 {
-    if (cho == nullptr)
+    if (nullptr == outer_change
+            || nullptr == inner_change)
     {
         logError(RTPS_WRITER_HISTORY, "Pointer is not valid")
         return false;
     }
 
-    if (cho->writerGUID != mp_writer->getGuid())
+    if (outer_change->writerGUID != mp_writer->getGuid())
     {
         logError(RTPS_WRITER_HISTORY,
-                "Change writerGUID " << cho->writerGUID << " different than Writer GUID " <<
+                "Change writerGUID " << outer_change->writerGUID << " different than Writer GUID " <<
                 mp_writer->getGuid());
         return false;
     }
 
-    return chi->sequenceNumber == cho->sequenceNumber;
+    return inner_change->sequenceNumber == outer_change->sequenceNumber;
 }
 
 History::iterator WriterHistory::remove_change_nts(

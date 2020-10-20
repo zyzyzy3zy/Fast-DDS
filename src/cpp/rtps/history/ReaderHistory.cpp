@@ -92,17 +92,18 @@ bool ReaderHistory::add_change(
 }
 
 bool ReaderHistory::matches_change(
-        const CacheChange_t* chi,
-        CacheChange_t* cho)
+        const CacheChange_t* inner_change,
+        CacheChange_t* outer_change)
 {
-    if (cho == nullptr)
+    if (nullptr == outer_change
+            || nullptr == inner_change)
     {
         logError(RTPS_READER_HISTORY, "Pointer is not valid")
         return false;
     }
 
-    return chi->sequenceNumber == cho->sequenceNumber &&
-           chi->writerGUID == cho->writerGUID;
+    return inner_change->sequenceNumber == outer_change->sequenceNumber &&
+           inner_change->writerGUID == outer_change->writerGUID;
 }
 
 History::iterator ReaderHistory::remove_change_nts(
@@ -129,17 +130,6 @@ History::iterator ReaderHistory::remove_change_nts(
     }
 
     return m_changes.erase(removal);
-}
-
-History::const_iterator ReaderHistory::remove_change_nts(
-        CacheChange_t* a_change,
-        History::const_iterator position)
-{
-    (void)a_change;
-    assert(nullptr != a_change);
-    assert((*position) == a_change);
-    do_release_cache(a_change);
-    return m_changes.erase(position);
 }
 
 bool ReaderHistory::remove_changes_with_guid(
