@@ -136,7 +136,7 @@ bool WriterHistory::matches_change(
     return chi->sequenceNumber == cho->sequenceNumber;
 }
 
-History::iterator WriterHistory::remove_change(
+History::iterator WriterHistory::remove_change_nts(
         const_iterator removal,
         bool release)
 {
@@ -151,8 +151,6 @@ History::iterator WriterHistory::remove_change(
         logInfo(RTPS_WRITER_HISTORY, "Trying to remove without a proper CacheChange_t referenced");
         return changesEnd();
     }
-
-    std::lock_guard<RecursiveTimedMutex> guard(*mp_mutex);
 
     CacheChange_t* change = *removal;
     mp_writer->change_removed_by_history(change);

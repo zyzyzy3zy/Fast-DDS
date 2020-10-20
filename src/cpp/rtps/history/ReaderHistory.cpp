@@ -105,7 +105,7 @@ bool ReaderHistory::matches_change(
            chi->writerGUID == cho->writerGUID;
 }
 
-History::iterator ReaderHistory::remove_change(
+History::iterator ReaderHistory::remove_change_nts(
         const_iterator removal,
         bool release)
 {
@@ -120,8 +120,6 @@ History::iterator ReaderHistory::remove_change(
         logInfo(RTPS_WRITER_HISTORY, "Trying to remove without a proper CacheChange_t referenced");
         return changesEnd();
     }
-
-    std::lock_guard<RecursiveTimedMutex> guard(*mp_mutex);
 
     CacheChange_t* change = *removal;
     mp_reader->change_removed_by_history(change);
