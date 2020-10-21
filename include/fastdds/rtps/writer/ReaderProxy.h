@@ -366,10 +366,10 @@ public:
     }
 
     /**
-     * Get the lowest sequence number of the changes for this reader.
-     * @return the lowest sequence number of the changes for this reader.
+     * Get the first relevant sequence number of the changes for this reader.
+     * @return the first relevant sequence number of the changes for this reader.
      */
-    SequenceNumber_t first_change_sequence_number() const;
+    SequenceNumber_t first_relevant_sequence_number() const;
 
     /**
      * Change the interval of nack-supression event.

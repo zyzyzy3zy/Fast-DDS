@@ -472,10 +472,10 @@ bool StatefulWriter::intraprocess_heartbeat(
                 if (reader_proxy->durability_kind() < TRANSIENT_LOCAL ||
                         this->getAttributes().durabilityKind < TRANSIENT_LOCAL)
                 {
-                    SequenceNumber_t last_irrelevance = reader_proxy->first_change_sequence_number() - 1;
-                    if (first_seq <= last_irrelevance)
+                    SequenceNumber_t first_relevant = reader_proxy->first_relevant_sequence_number();
+                    if (first_seq < first_relevant)
                     {
-                        reader->processGapMsg(m_guid, first_seq, SequenceNumberSet_t(last_irrelevance + 1));
+                        reader->processGapMsg(m_guid, first_seq, SequenceNumberSet_t(first_relevant));
                     }
                 }
             }
@@ -1856,10 +1856,10 @@ void StatefulWriter::send_heartbeat_to_nts(
             SequenceNumber_t first_seq = get_seq_num_min();
             if (first_seq != c_SequenceNumber_Unknown)
             {
-                SequenceNumber_t low_mark = remoteReaderProxy.first_change_sequence_number() - 1;
-                if (remoteReaderProxy.durability_kind() == VOLATILE && first_seq <= low_mark)
+                SequenceNumber_t first_relevant = remoteReaderProxy.first_relevant_sequence_number();
+                if (remoteReaderProxy.durability_kind() == VOLATILE && first_seq < first_relevant)
                 {
-                    group.add_gap(first_seq, SequenceNumberSet_t(low_mark + 1));
+                    group.add_gap(first_seq, SequenceNumberSet_t(first_relevant));
                 }
                 remoteReaderProxy.send_gaps(group, mp_history->next_sequence_number());
             }

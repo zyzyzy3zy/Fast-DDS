@@ -261,7 +261,7 @@ bool ReaderProxy::change_is_acked(
     return chit->getStatus() == ACKNOWLEDGED;
 }
 
-SequenceNumber_t ReaderProxy::first_change_sequence_number() const
+SequenceNumber_t ReaderProxy::first_relevant_sequence_number() const
 {
     if (changes_for_reader_.empty())
     {
